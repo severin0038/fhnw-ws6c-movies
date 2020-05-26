@@ -34,8 +34,6 @@ class MovieViewModel: ObservableObject {
                     lhs.title < rhs.title
                 })
                 self?.movies.append(contentsOf: sortedMovies)}
-        print("Anz movies: \(self.movies.count)")
-
     }
     
     func ratingForMovieId(id: Int)->Int{
@@ -70,6 +68,7 @@ class MovieViewModel: ObservableObject {
     
     func setFavoriteMovies() {
         let favoriteIds = ratingModel.getFavoriteMovieIds()
+        self.favoriteMovies.removeAll()
         
         for movie in self.movies {
             if favoriteIds.contains(movie.id) {

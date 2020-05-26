@@ -10,14 +10,18 @@ import SwiftUI
 
 struct MovieListView: View {
     
-    @ObservedObject var viewModel = MovieViewModel()
+    @ObservedObject var viewModel: MovieViewModel
+    
+    init(viewModel: MovieViewModel) {
+        self.viewModel = viewModel
+        UITableView.appearance().separatorStyle = .none
+    }
     
     var body: some View {
         NavigationView {
             List {
                 ForEach(viewModel.movies) { movie in
-                    MovieRow(movie: movie, viewModel: self.viewModel)
-                        .padding(.horizontal, 20)
+                    MovieRow(isFavorite: self.viewModel.isFavorite(id: movie.id),movie: movie, viewModel: self.viewModel)
                         .padding(.vertical, 13)
                 }
             }.navigationBarTitle(Text("Discover"))

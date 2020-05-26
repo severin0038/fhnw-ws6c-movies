@@ -15,11 +15,13 @@ class MovieViewModel: ObservableObject {
     private let ratingModel = RatingModel()
     
     @Published var movies = [Movie]()
+    @Published var favoriteMovies = [Movie]()
     
     init(provider: NetworkManager? = NetworkManager(), movies: [Movie] = []) {
         self.provider = provider
         self.movies = movies
         loadNewMovies()
+        self.setFavoriteMovies()
     }
     
     func loadNewMovies(){
@@ -32,6 +34,8 @@ class MovieViewModel: ObservableObject {
                     lhs.title < rhs.title
                 })
                 self?.movies.append(contentsOf: sortedMovies)}
+        print("Anz movies: \(self.movies.count)")
+
     }
     
     func ratingForMovieId(id: Int)->Int{
@@ -41,4 +45,37 @@ class MovieViewModel: ObservableObject {
     func updateRating(movieId: Int, rating: Int){
         ratingModel.updateRating(movieId: movieId, rating: rating)
     }
+    
+    func isFavorite(id: Int) -> Bool {
+        ratingModel.isFavorite(id: id)
+    }
+    
+    func handleFavorites(id: Int) {
+        ratingModel.handleFavorites(id: id)
+        self.setFavoriteMovies()
+    }
+    
+    func getFavoriteMovies() -> [Movie] {
+        let favoriteIds = ratingModel.getFavoriteMovieIds()
+        var favoriteMovies = [Movie]()
+        
+        for movie in movies {
+            if favoriteIds.contains(movie.id) {
+                favoriteMovies.append(movie)
+            }
+        }
+        
+        return favoriteMovies
+    }
+    
+    func setFavoriteMovies() {
+        let favoriteIds = ratingModel.getFavoriteMovieIds()
+        
+        for movie in self.movies {
+            if favoriteIds.contains(movie.id) {
+                self.favoriteMovies.append(movie)
+            }
+        }
+    }
+
 }

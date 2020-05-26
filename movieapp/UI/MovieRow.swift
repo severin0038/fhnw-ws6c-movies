@@ -11,9 +11,13 @@ import SwiftUI
 
 struct MovieRow: SwiftUI.View {
     
+    @State var isFavorite: Bool
     let movie: Movie
-    let viewModel: MovieViewModel
+    @ObservedObject var viewModel: MovieViewModel
+    var favoriteOnImage = Image(systemName: "heart.fill")
+    var favoriteOffImage = Image(systemName: "heart")
     
+
     var body: some SwiftUI.View {
         ZStack(alignment: Alignment(horizontal: .leading, vertical: .bottom)) {
             ZStack(alignment: Alignment(horizontal: .leading, vertical: .top
@@ -41,9 +45,29 @@ struct MovieRow: SwiftUI.View {
                 }
             }
             
-            RatingSummaryView(rating: self.viewModel.ratingForMovieId(id: movie.id))
+            HStack(alignment: .center) {
+                RatingSummaryView(rating: self.viewModel.ratingForMovieId(id: movie.id))
+                    .padding(.horizontal, 25)
+                    .padding(.vertical, 13)
+                           
+                Spacer()
+                
+                Button(action: {
+                    self.isFavorite = !self.isFavorite
+                    self.viewModel.handleFavorites(id: self.movie.id)
+                } ){
+                    self.favoriteImage()
+                        .foregroundColor(.white)
+                        .frame(width: 16, height: 16)
+                        .padding(6)
+                }
+                .background(Circle())
+                .foregroundColor(.blue)
+                .frame(width: 29, height: 29)
                 .padding(.horizontal, 25)
                 .padding(.vertical, 13)
+            }
+
         }
         .shadow(radius: 6, y: 13)
     }
@@ -52,10 +76,19 @@ struct MovieRow: SwiftUI.View {
         let i = s.startIndex..<s.index(s.startIndex, offsetBy: 4)
         return s[i]
     }
+    
+    func favoriteImage() -> SwiftUI.Image {
+        if isFavorite {
+            return favoriteOnImage
+        } else {
+            return favoriteOffImage
+        }
+    }
+    
 }
 
 struct MovieRow_Previews: PreviewProvider {
     static var previews: some SwiftUI.View {
-        MovieRow(movie: ExampleDataProvider.movies[0], viewModel: MovieViewModel())
+        MovieRow(isFavorite: false, movie: ExampleDataProvider.movies[0], viewModel: MovieViewModel())
     }
 }

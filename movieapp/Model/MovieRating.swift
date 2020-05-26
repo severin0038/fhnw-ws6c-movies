@@ -13,7 +13,8 @@ class MovieRating: Object{
     
     @objc dynamic var movieId: Int = 0
     @objc dynamic var rating:  Int = 0
-    
+    @objc dynamic var isFavorite: Bool = false
+
     override class func primaryKey() -> String? {
         return "movieId"
     }

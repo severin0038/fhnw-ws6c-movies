@@ -9,7 +9,7 @@
 import Foundation
 import SwiftUI
 
-class MovieViewModel: ObservableObject{
+class MovieViewModel: ObservableObject {
     
     private let provider: NetworkManager?
     private let ratingModel = RatingModel()

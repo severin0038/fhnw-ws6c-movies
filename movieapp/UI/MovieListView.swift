@@ -9,13 +9,25 @@
 import SwiftUI
 
 struct MovieListView: View {
+    
+    @ObservedObject var viewModel = MovieViewModel()
+    
     var body: some View {
-        Text("Movie List")
+        NavigationView {
+            List {
+                ForEach(viewModel.movies) { movie in
+                    MovieRow(movie: movie, viewModel: self.viewModel)
+                        .padding(.horizontal, 20)
+                        .padding(.vertical, 13)
+                }
+            }.navigationBarTitle(Text("Discover"))
+        }
+        
     }
 }
 
 struct MovieListView_Previews: PreviewProvider {
     static var previews: some View {
-        MovieListView()
+        MovieListView(viewModel: MovieViewModel(provider: nil, movies: ExampleDataProvider.movies))
     }
 }

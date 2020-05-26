@@ -13,7 +13,7 @@ struct MovieRow: SwiftUI.View {
     
     @State var isFavorite: Bool
     let movie: Movie
-    @ObservedObject var viewModel: MovieViewModel
+    var viewModel: ViewModel
     var favoriteOnImage = Image(systemName: "heart.fill")
     var favoriteOffImage = Image(systemName: "heart")
     
@@ -54,7 +54,7 @@ struct MovieRow: SwiftUI.View {
                 
                 Button(action: {
                     self.isFavorite = !self.isFavorite
-                    self.viewModel.handleFavorites(id: self.movie.id)
+                    self.viewModel.updateFavorites(id: self.movie.id)
                 } ){
                     self.favoriteImage()
                         .foregroundColor(.white)

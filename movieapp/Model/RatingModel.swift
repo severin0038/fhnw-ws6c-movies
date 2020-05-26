@@ -29,4 +29,37 @@ class RatingModel{
         }
     }
     
+    func isFavorite(id: Int) -> Bool {
+        let result = realm.objects(MovieRating.self).filter("movieId = %@", id)
+        
+        guard let movie = result.first else {
+            return false
+        }
+        
+        return movie.isFavorite
+    }
+    
+    func handleFavorites(id: Int) {
+        if isFavorite(id: id) {
+            try! realm.write {
+                realm.create(MovieRating.self, value: ["movieId": id, "isFavorite": false], update: .modified)
+            }
+        } else {
+            try! realm.write {
+                realm.create(MovieRating.self, value: ["movieId": id, "isFavorite": true], update: .modified)
+            }
+        }
+    }
+    
+    func getFavoriteMovieIds() -> [Int] {
+        let result = realm.objects(MovieRating.self).filter("isFavorite = %@", true)
+        var ids = [Int]()
+        
+        for movieRating in result {
+            ids.append(movieRating.movieId)
+        }
+        
+        return ids
+    }
+    
 }

@@ -11,11 +11,11 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         TabView {
-            MovieListView().tabItem {
+            MovieListView(viewModel: MovieViewModel()).tabItem {
                 Image(systemName: "house")
                 Text("Movies")
             }
-            FavoritesView().tabItem {
+            FavoritesView(viewModel: MovieViewModel()).tabItem {
                 Image(systemName: "star")
                 Text("Favorites")
             }

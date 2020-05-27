@@ -13,11 +13,7 @@ struct MovieRow: SwiftUI.View {
     
     @State var isFavorite: Bool
     let movie: Movie
-<<<<<<< HEAD
-    @ObservedObject var viewModel: MovieViewModel
-=======
     var viewModel: ViewModel
->>>>>>> favorites-overview
     var favoriteOnImage = Image(systemName: "heart.fill")
     var favoriteOffImage = Image(systemName: "heart")
     

@@ -19,7 +19,7 @@ struct ContentView: View {
                 Image(systemName: "star")
                 Text("Favorites")
             }
-            SearchView().tabItem {
+            SearchView(viewModel: MovieViewModel()).tabItem {
                 Image(systemName: "magnifyingglass")
                 Text("Search")
             }

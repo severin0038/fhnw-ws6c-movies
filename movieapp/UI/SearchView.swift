@@ -70,14 +70,15 @@ struct SearchView: View {
                 .padding (.horizontal)
                 .navigationBarHidden(showCancelButton)
                 
-                //For Each accepts Array or Range
-                //Text accepts String
+                
                 List {
-                    ForEach(viewModel.movies.filter({ (<#Movie#>) -> Bool in
-                        <#code#>
-                    })){
-                        $0.contains(searchText) || searchText == ""}, id:\.self) {
-                        searchText in Text(searchText)
+                    ForEach(viewModel.movies.filter { (movie) -> Bool in
+                        return movie.title.contains(searchText) || searchText == ""
+                    })
+                        {
+                        movie in
+                            Text(movie.title)
+                                .font(.headline)
                     }
                     
                 }

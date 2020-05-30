@@ -10,9 +10,9 @@ import SwiftUI
 
 struct FavoritesView: View {
     
-    @ObservedObject var viewModel: MovieViewModel
+    @ObservedObject var viewModel: FavoritesViewModel
     
-    init(viewModel: MovieViewModel) {
+    init(viewModel: FavoritesViewModel) {
         self.viewModel = viewModel
         UITableView.appearance().separatorStyle = .none
     }
@@ -24,13 +24,17 @@ struct FavoritesView: View {
                     MovieRow(isFavorite: self.viewModel.isFavorite(id: movie.id),movie: movie, viewModel: self.viewModel)
                         .padding(.vertical, 13)
                 }
-            }.navigationBarTitle(Text("Favorites"))
+            }
+            .navigationBarTitle(Text("Favorites"))
+            .onAppear() {
+                self.viewModel.loadNewMovies()
+            }
         }
     }
 }
 
 struct FavoritesView_Previews: PreviewProvider {
     static var previews: some View {
-        FavoritesView(viewModel: MovieViewModel())
+        FavoritesView(viewModel: FavoritesViewModel())
     }
 }

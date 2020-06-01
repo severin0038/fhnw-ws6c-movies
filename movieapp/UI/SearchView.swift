@@ -19,17 +19,16 @@ struct SearchView: View {
     
     @State private var searchText = ""
     @State private var showCancelButton: Bool = false
-    //let searchResult = [Movie]()
+    
     
     var body: some View {
         
         NavigationView {
-            //VStack---------------------
+            
             VStack {
                 
-                //SearchView-HStack
                 HStack {
-                    //HStack--------------
+                    
                     HStack {
                         Image (systemName: "magnifyingglass")
                         
@@ -47,14 +46,14 @@ struct SearchView: View {
                             Image(systemName: "xmark.circle.fill").opacity(searchText == "" ? 0 : 1)
                         }
                     }
-                    //HStack-End--------------
+                    
                         
                     .padding(EdgeInsets(top: 8, leading: 6, bottom: 8, trailing: 6))
                     .foregroundColor(.secondary)
                     .background(Color(.secondarySystemBackground))
                     .cornerRadius(10.0)
                     
-                    //-------------------
+                    
                     if showCancelButton {
                         Button ("Cancel") {
                             UIApplication.shared.endEditing(true)
@@ -63,9 +62,9 @@ struct SearchView: View {
                         }
                         .foregroundColor(Color(.systemBlue))
                     }
-                    //---------------------
+                    
                 }
-                //SearchView-HStack-End----------
+                
                 
                 .padding (.horizontal)
                 .navigationBarHidden(showCancelButton)
@@ -87,13 +86,13 @@ struct SearchView: View {
                 .navigationBarTitle(Text("Search"))
                 .resignKeyboardOnDragGesture()
                 
-            } //VStack-End------------
+            }
             
-        } //NavigationView-End------------
+        }
         
-    } //body some View- End-------
+    }
     
-} //SearchView View- End
+}
 
                        
 

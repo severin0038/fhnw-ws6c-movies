@@ -42,32 +42,40 @@ struct MovieRow: SwiftUI.View {
                         .padding(.horizontal, 25)
                         .foregroundColor(.white)
                         .shadow(color: Color(.sRGBLinear, white: 0, opacity: 0.8), radius: 2)
+                    
+        
+                    NavigationLink(destination: MovieSingleView(movie: movie)) {
+                        Text("Zum Film")
+                    }
+        
+                    
+                    Spacer()
+                    
+                    HStack(alignment: .center) {
+                        RatingSummaryView(rating: self.viewModel.ratingForMovieId(id: movie.id))
+                            .padding(.horizontal, 25)
+                            .padding(.vertical, 13)
+                                   
+                        Spacer()
+                        
+                        Button(action: {
+                            self.isFavorite = !self.isFavorite
+                            self.viewModel.updateFavorites(id: self.movie.id)
+                        }) {
+                            self.favoriteImage()
+                                .foregroundColor(.white)
+                                .frame(width: 16, height: 16)
+                                .padding(6)
+                        }
+                        .background(Circle())
+                        .foregroundColor(.blue)
+                        .frame(width: 29, height: 29)
+                        .padding(.horizontal, 25)
+                        .padding(.vertical, 13)
+                        
+                    }
                 }
             }
-            
-            HStack(alignment: .center) {
-                RatingSummaryView(rating: self.viewModel.ratingForMovieId(id: movie.id))
-                    .padding(.horizontal, 25)
-                    .padding(.vertical, 13)
-                           
-                Spacer()
-                
-                Button(action: {
-                    self.isFavorite = !self.isFavorite
-                    self.viewModel.updateFavorites(id: self.movie.id)
-                } ){
-                    self.favoriteImage()
-                        .foregroundColor(.white)
-                        .frame(width: 16, height: 16)
-                        .padding(6)
-                }
-                .background(Circle())
-                .foregroundColor(.blue)
-                .frame(width: 29, height: 29)
-                .padding(.horizontal, 25)
-                .padding(.vertical, 13)
-            }
-
         }
         .shadow(radius: 6, y: 13)
     }

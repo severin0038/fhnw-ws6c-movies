@@ -76,8 +76,10 @@ struct SearchView: View {
                     })
                         {
                         movie in
-                            Text(movie.title)
-                                .font(.headline)
+                            NavigationLink(destination: MovieSingleView(movie: movie)) {
+                                Text(movie.title)
+                            }
+                            .font(.headline)
                     }
                     
                 }

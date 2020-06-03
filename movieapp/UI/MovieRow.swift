@@ -58,21 +58,20 @@ struct MovieRow: SwiftUI.View {
                                    
                         Spacer()
                         
-                        Button(action: {
-                            self.isFavorite = !self.isFavorite
-                            self.viewModel.updateFavorites(id: self.movie.id)
-                        }) {
-                            self.favoriteImage()
-                                .foregroundColor(.white)
-                                .frame(width: 16, height: 16)
-                                .padding(6)
+                        favoriteImage()
+                            .foregroundColor(.white)
+                            .frame(width: 16, height: 16)
+                            .padding(6)
+                            .background(Circle())
+                            .foregroundColor(.blue)
+                            .frame(width: 29, height: 29)
+                            .padding(.horizontal, 25)
+                            .padding(.vertical, 13)
+                            .onTapGesture {
+                                self.isFavorite = !self.isFavorite
+                                self.viewModel.updateFavorites(id: self.movie.id)
                         }
-                        .background(Circle())
-                        .foregroundColor(.blue)
-                        .frame(width: 29, height: 29)
-                        .padding(.horizontal, 25)
-                        .padding(.vertical, 13)
-                        
+
                     }
                 }
             }

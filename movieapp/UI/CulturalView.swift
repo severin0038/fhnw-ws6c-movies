@@ -8,7 +8,7 @@
 
 import SwiftUI
 
-struct ChineseView: View {
+struct CulturalView: View {
     
     @ObservedObject var viewModel: MovieViewModel
        
@@ -21,9 +21,11 @@ struct ChineseView: View {
         NavigationView {
             List {
                 ForEach(viewModel.movies.filter { (movie) -> Bool in
-                    return movie.originalLanguage == "zh"
+                    return movie.originalLanguage != "en"
                 }) { movie in
-                    MovieRow(isFavorite: self.viewModel.isFavorite(id: movie.id),movie: movie, viewModel: self.viewModel)
+                    NavigationLink(destination: MovieSingleView(movie: movie)) {
+                        MovieRow(isFavorite: self.viewModel.isFavorite(id: movie.id),movie: movie, viewModel: self.viewModel)
+                    }
                     .padding(.vertical, 13)
                 }
             }.navigationBarTitle(Text("Chinese"))
@@ -31,8 +33,8 @@ struct ChineseView: View {
     }
 }
 
-struct FrenchView_Previews: PreviewProvider {
+struct CulturalView_Previews: PreviewProvider {
     static var previews: some View {
-        ChineseView(viewModel: MovieViewModel(provider: nil, movies: ExampleDataProvider.movies))
+        CulturalView(viewModel: MovieViewModel(provider: nil, movies: ExampleDataProvider.movies))
     }
 }

@@ -23,9 +23,9 @@ struct ContentView: View {
                 Image(systemName: "magnifyingglass")
                 Text("Search")
             }
-            ChineseView(viewModel: MovieViewModel()).tabItem {
+            CulturalView(viewModel: MovieViewModel()).tabItem {
                 Image(systemName: "bubble.left")
-                Text("Chinese")
+                Text("Culture")
             }
         }
         .accentColor(.yellow)

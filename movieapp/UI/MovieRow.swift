@@ -42,13 +42,7 @@ struct MovieRow: SwiftUI.View {
                         .padding(.horizontal, 25)
                         .foregroundColor(.white)
                         .shadow(color: Color(.sRGBLinear, white: 0, opacity: 0.8), radius: 2)
-                    
-        
-                    NavigationLink(destination: MovieSingleView(movie: movie)) {
-                        Text("Zum Film")
-                    }
-        
-                    
+
                     Spacer()
                     
                     HStack(alignment: .center) {

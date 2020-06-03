@@ -21,8 +21,10 @@ struct FavoritesView: View {
         NavigationView {
             List {
                 ForEach(viewModel.favoriteMovies) { movie in
-                    MovieRow(isFavorite: self.viewModel.isFavorite(id: movie.id),movie: movie, viewModel: self.viewModel)
-                        .padding(.vertical, 13)
+                    NavigationLink(destination: MovieSingleView(movie: movie)) {
+                        MovieRow(isFavorite: self.viewModel.isFavorite(id: movie.id),movie: movie, viewModel: self.viewModel)
+                    }
+                    .padding(.vertical, 13)
                 }
             }
             .navigationBarTitle(Text("Favorites"))

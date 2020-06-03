@@ -46,7 +46,7 @@ struct MovieRow: SwiftUI.View {
                     Spacer()
                     
                     HStack(alignment: .center) {
-                        RatingSummaryView(rating: self.viewModel.ratingForMovieId(id: movie.id))
+                        RatingSummaryView(movie: movie)
                             .padding(.horizontal, 25)
                             .padding(.vertical, 13)
                                    

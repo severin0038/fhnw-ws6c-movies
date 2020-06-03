@@ -10,7 +10,7 @@ import SwiftUI
 
 struct RatingSummaryView: View {
     
-    @State var rating: Int
+    var movie: Movie
     
     var body: some View {
         HStack {
@@ -18,7 +18,7 @@ struct RatingSummaryView: View {
                 .resizable()
                 .frame(width: 16, height: 16)
                 .foregroundColor(Color.yellow)
-            Text(String(rating))
+            Text(String(movie.voteAverage))
                 .font(.system(size: 12))
                 .foregroundColor(Color.yellow)
         }
@@ -27,6 +27,6 @@ struct RatingSummaryView: View {
 
 struct RatingSummaryView_Previews: PreviewProvider {
     static var previews: some View {
-        RatingSummaryView(rating: 3)
+        RatingSummaryView(movie: ExampleDataProvider.movies[0])
     }
 }

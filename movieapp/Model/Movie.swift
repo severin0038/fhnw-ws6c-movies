@@ -13,10 +13,10 @@ struct Movie: Codable, Identifiable {
     let popularity: Double
     let voteCount: Int
     let video: Bool
-    let posterPath: String
+    let posterPath: String?
     let id: Int
     let adult: Bool
-    let backdropPath: String
+    let backdropPath: String?
     let originalLanguage: String
     let originalTitle: String
     let genreIDS: [Int]
@@ -44,7 +44,14 @@ struct Movie: Codable, Identifiable {
 extension Movie{
     var fullPosterURL:URL?{
         get{
-            return URL(string: "https://image.tmdb.org/t/p/w500" + backdropPath)
+            var imgPath = ""
+            if (backdropPath == nil) {
+                imgPath = "https://via.placeholder.com/500x281?text=No%20image"
+            } else {
+                imgPath = "https://image.tmdb.org/t/p/w500" + backdropPath!
+            }
+            
+            return URL(string: imgPath)
         }
     }
 }

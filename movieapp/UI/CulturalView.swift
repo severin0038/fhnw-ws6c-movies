@@ -28,7 +28,7 @@ struct CulturalView: View {
                     }
                     .padding(.vertical, 13)
                 }
-            }.navigationBarTitle(Text("Chinese"))
+            }.navigationBarTitle(Text("Culture"))
         }
     }
 }

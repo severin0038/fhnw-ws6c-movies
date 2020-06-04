@@ -72,7 +72,7 @@ struct SearchView: View {
                 
                 List {
                     ForEach(viewModel.movies.filter { (movie) -> Bool in
-                        return movie.title.contains(searchText) || searchText == ""
+                        return movie.title.localizedStandardContains(searchText) || searchText == ""
                     })
                         {
                         movie in
